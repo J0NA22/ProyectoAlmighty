@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Almighty Barbershop - Propuestas de Landing Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0A0A0A;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 12px;
+            letter-spacing: -1px;
+        }
+
+        .header h1 span {
+            background: linear-gradient(135deg, #D4A843, #FF2D2D, #667eea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            color: #888;
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        .card {
+            background: #141414;
+            border: 1px solid #222;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: #444;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-img {
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .card:hover .card-img img {
+            transform: scale(1.08);
+        }
+
+        .card-body {
+            padding: 28px;
+        }
+
+        .card-tag {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 5px 12px;
+            border-radius: 20px;
+            margin-bottom: 14px;
+        }
+
+        .tag-1 { background: rgba(212, 168, 67, 0.15); color: #D4A843; }
+        .tag-2 { background: rgba(102, 126, 234, 0.15); color: #667eea; }
+        .tag-3 { background: rgba(255, 45, 45, 0.15); color: #FF2D2D; }
+
+        .card h2 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .card p {
+            color: #888;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .card-colors {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .color-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #333;
+        }
+
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .card:nth-child(1) .card-link { color: #D4A843; }
+        .card:nth-child(2) .card-link { color: #667eea; }
+        .card:nth-child(3) .card-link { color: #FF2D2D; }
+
+        .card:hover .card-link { gap: 12px; }
+
+        .footer {
+            margin-top: 60px;
+            color: #444;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Almighty <span>Barbershop</span></h1>
+        <p>3 propuestas de landing page con estilos completamente diferentes. Elige tu favorita.</p>
+    </div>
+
+    <div class="cards">
+        <a href="propuesta1/index.html" class="card">
+            <div class="card-img">
+                <img src="assets/img/hero-classic.png" alt="Propuesta 1 - Clásica">
+            </div>
+            <div class="card-body">
+                <span class="card-tag tag-1">PROPUESTA 1</span>
+                <h2>Estilo Clásico / Elegante</h2>
+                <p>Negro, dorado y blanco. Tipografía tradicional de barbería con un toque premium y sofisticado.</p>
+                <div class="card-colors">
+                    <div class="color-dot" style="background: #0A0A0A;"></div>
+                    <div class="color-dot" style="background: #D4A843;"></div>
+                    <div class="color-dot" style="background: #FAFAFA;"></div>
+                </div>
+                <span class="card-link">Ver propuesta →</span>
+            </div>
+        </a>
+
+        <a href="propuesta2/index.html" class="card">
+            <div class="card-img">
+                <img src="assets/img/hero-modern.png" alt="Propuesta 2 - Moderna">
+            </div>
+            <div class="card-body">
+                <span class="card-tag tag-2">PROPUESTA 2</span>
+                <h2>Estilo Moderno / Minimalista</h2>
+                <p>Blanco, gris y acentos púrpura. Diseño limpio tipo startup con enfoque en conversión.</p>
+                <div class="card-colors">
+                    <div class="color-dot" style="background: #FAFBFC;"></div>
+                    <div class="color-dot" style="background: #6B7280;"></div>
+                    <div class="color-dot" style="background: #667eea;"></div>
+                </div>
+                <span class="card-link">Ver propuesta →</span>
+            </div>
+        </a>
+
+        <a href="propuesta3/index.html" class="card">
+            <div class="card-img">
+                <img src="assets/img/hero-urban.png" alt="Propuesta 3 - Urbana">
+            </div>
+            <div class="card-body">
+                <span class="card-tag tag-3">PROPUESTA 3</span>
+                <h2>Estilo Urbano / Juvenil</h2>
+                <p>Negro, rojo y neón. Estilo street/barber moderno con animaciones dinámicas y energía.</p>
+                <div class="card-colors">
+                    <div class="color-dot" style="background: #0A0A0A;"></div>
+                    <div class="color-dot" style="background: #FF2D2D;"></div>
+                    <div class="color-dot" style="background: #FF0040;"></div>
+                </div>
+                <span class="card-link">Ver propuesta →</span>
+            </div>
+        </a>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2026 Almighty Barbershop — Proyecto de Propuestas de Landing Page</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Almighty Barber Co. - La barbería urbana con estilo. Cortes de tendencia, fades brutales y el mejor ambiente. Reserva ahora.">
+    <meta name="keywords" content="barbería urbana, fade, cortes modernos, barber, street style, barbershop juvenil">
+    <meta name="author" content="Almighty Barber Co.">
+    <meta property="og:title" content="Almighty Barber Co. - Barbería Urbana">
+    <meta property="og:description" content="Estilo sin límites. Los mejores cortes de la ciudad con vibras que no encontrarás en otro lado.">
+    <meta property="og:type" content="website">
+    <title>Almighty Barber Co. | Estilo Urbano & Juvenil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="urban.css">
+</head>
+<body>
+    <!-- ========== NAVEGACIÓN ========== -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <span class="logo-emoji">💈</span>
+                <span class="logo-text">ALMIGHTY<span class="logo-red">.</span></span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Menú">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#equipo">Equipo</a></li>
+                <li><a href="#galeria">Galería</a></li>
+                <li><a href="#promos">Promos</a></li>
+                <li><a href="#resenas">Reseñas</a></li>
+                <li><a href="https://wa.me/5211234567890?text=Hola,%20quiero%20agendar%20una%20cita" class="nav-cta" target="_blank">🔥 Reservar</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ========== HERO CON ANIMACIONES ========== -->
+    <header class="hero" id="inicio">
+        <div class="hero-bg-effects">
+            <div class="neon-line neon-1"></div>
+            <div class="neon-line neon-2"></div>
+            <div class="neon-circle"></div>
+            <div class="grid-overlay"></div>
+        </div>
+        <div class="container hero-container">
+            <div class="hero-content">
+                <div class="hero-tag">
+                    <span class="tag-pulse"></span>
+                    ABIERTO AHORA — WALK-INS BIENVENIDOS
+                </div>
+                <h1 class="hero-title">
+                    <span class="title-line">ESTILO</span>
+                    <span class="title-line title-outline">SIN</span>
+                    <span class="title-line title-red">LÍMITES<span class="blink">_</span></span>
+                </h1>
+                <p class="hero-subtitle">Los mejores cortes de la ciudad. Fades brutales, barbas limpias y vibras que no encontrarás en otro lado.</p>
+                <div class="hero-actions">
+                    <a href="https://wa.me/5211234567890?text=Hola,%20quiero%20agendar%20una%20cita" class="btn btn-red" target="_blank">
+                        RESERVAR AHORA
+                        <span class="btn-arrow">→</span>
+                    </a>
+                    <a href="#servicios" class="btn btn-glass">VER SERVICIOS</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="stat-val">5K+</span>
+                        <span class="stat-lbl">CLIENTES</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="stat-val">4.9★</span>
+                        <span class="stat-lbl">RATING</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="stat-val">10+</span>
+                        <span class="stat-lbl">AÑOS</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-img-container">
+                    <img src="../assets/img/hero-urban.png" alt="Almighty Barber Co. - Barbería urbana" loading="eager">
+                    <div class="img-glow"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========== SERVICIOS DESTACADOS ========== -->
+    <section class="services" id="servicios">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">// SERVICIOS</span>
+                <h2 class="section-title">¿QUÉ <span class="red">HACEMOS</span>?</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card" data-index="01">
+                    <div class="service-number">01</div>
+                    <h3>Corte Clásico</h3>
+                    <p>Corte personalizado con las mejores técnicas. Tu estilo, tu regla.</p>
+                    <div class="service-bottom">
+                        <span class="service-price">$150</span>
+                        <span class="service-tag">45 MIN</span>
+                    </div>
+                </div>
+                <div class="service-card hot" data-index="02">
+                    <div class="hot-badge">🔥 HOT</div>
+                    <div class="service-number">02</div>
+                    <h3>Corte + Barba</h3>
+                    <p>El combo que todos piden. Fade limpio + barba perfilada con navaja.</p>
+                    <div class="service-bottom">
+                        <span class="service-price">$250</span>
+                        <span class="service-tag">60 MIN</span>
+                    </div>
+                </div>
+                <div class="service-card" data-index="03">
+                    <div class="service-number">03</div>
+                    <h3>Afeitado Clásico</h3>
+                    <p>Toalla caliente, navaja afilada y la experiencia old school definitiva.</p>
+                    <div class="service-bottom">
+                        <span class="service-price">$180</span>
+                        <span class="service-tag">30 MIN</span>
+                    </div>
+                </div>
+                <div class="service-card" data-index="04">
+                    <div class="service-number">04</div>
+                    <h3>Fade Premium</h3>
+                    <p>Degradado perfecto pixel por pixel. Diseños y líneas si es lo tuyo.</p>
+                    <div class="service-bottom">
+                        <span class="service-price">$200</span>
+                        <span class="service-tag">50 MIN</span>
+                    </div>
+                </div>
+                <div class="service-card" data-index="05">
+                    <div class="service-number">05</div>
+                    <h3>Tratamiento Capilar</h3>
+                    <p>Hidratación, masaje craneal y boost de energía para tu pelo.</p>
+                    <div class="service-bottom">
+                        <span class="service-price">$300</span>
+                        <span class="service-tag">40 MIN</span>
+                    </div>
+                </div>
+                <div class="service-card" data-index="06">
+                    <div class="service-number">06</div>
+                    <h3>Paquete VIP</h3>
+                    <p>La experiencia FULL: corte, barba, facial, tratamiento + bebida gratis.</p>
+                    <div class="service-bottom">
+                        <span class="service-price">$450</span>
+                        <span class="service-tag">90 MIN</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== EQUIPO ========== -->
+    <section class="team" id="equipo">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">// EQUIPO</span>
+                <h2 class="section-title">LOS <span class="red">MEJORES</span> DE LA CIUDAD</h2>
+            </div>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-img">
+                        <img src="../assets/img/team-1.png" alt="Carlos - Master Barber" loading="lazy">
+                        <div class="team-role">MASTER BARBER</div>
+                    </div>
+                    <h3>Carlos R.</h3>
+                    <p>Especialista en fades y diseños. +8 años de experiencia.</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-img">
+                        <img src="../assets/img/service-2.png" alt="Miguel - Senior Barber" loading="lazy">
+                        <div class="team-role">SENIOR BARBER</div>
+                    </div>
+                    <h3>Miguel A.</h3>
+                    <p>Rey del afeitado clásico. Navaja en mano, arte puro.</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-img">
+                        <img src="../assets/img/service-3.png" alt="David - Barber" loading="lazy">
+                        <div class="team-role">BARBER</div>
+                    </div>
+                    <h3>David L.</h3>
+                    <p>Tendencias modernas y estilos creativos. Siempre innovando.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== GALERÍA TIPO INSTAGRAM ========== -->
+    <section class="gallery" id="galeria">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">// GALERÍA</span>
+                <h2 class="section-title">NUESTRO <span class="red">TRABAJO</span></h2>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="../assets/img/service-1.png" alt="Corte en proceso" loading="lazy">
+                    <div class="gallery-hover">
+                        <span class="gallery-like">♥ 234</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../assets/img/service-2.png" alt="Afeitado clásico" loading="lazy">
+                    <div class="gallery-hover">
+                        <span class="gallery-like">♥ 189</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../assets/img/service-3.png" alt="Resultado fade" loading="lazy">
+                    <div class="gallery-hover">
+                        <span class="gallery-like">♥ 312</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../assets/img/hero-urban.png" alt="Interior barbería" loading="lazy">
+                    <div class="gallery-hover">
+                        <span class="gallery-like">♥ 156</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../assets/img/team-1.png" alt="El equipo" loading="lazy">
+                    <div class="gallery-hover">
+                        <span class="gallery-like">♥ 278</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../assets/img/hero-classic.png" alt="Ambiente barbería" loading="lazy">
+                    <div class="gallery-hover">
+                        <span class="gallery-like">♥ 198</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PROMOCIONES ========== -->
+    <section class="promotions" id="promos">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">// PROMOS</span>
+                <h2 class="section-title">OFERTAS <span class="red">ACTIVAS</span> 🔥</h2>
+            </div>
+            <div class="promo-grid">
+                <div class="promo-card">
+                    <div class="promo-glow"></div>
+                    <div class="promo-percentage">-20%</div>
+                    <h3>PRIMERA VEZ</h3>
+                    <p>¿Es tu primera vez? Llévate un 20% OFF en cualquier servicio.</p>
+                    <a href="https://wa.me/5211234567890?text=Hola,%20quiero%20mi%20descuento%20de%20primera%20visita" class="btn btn-red btn-sm" target="_blank">LO QUIERO</a>
+                </div>
+                <div class="promo-card highlight">
+                    <div class="promo-glow"></div>
+                    <div class="promo-percentage">2×1</div>
+                    <h3>MARTES LOCOS</h3>
+                    <p>Trae a tu bro y el segundo corte va por la casa. Solo martes.</p>
+                    <a href="https://wa.me/5211234567890?text=Hola,%20quiero%20reservar%20para%20el%20martes%20de%20amigos" class="btn btn-red btn-sm" target="_blank">RESERVAR</a>
+                </div>
+                <div class="promo-card">
+                    <div class="promo-glow"></div>
+                    <div class="promo-percentage">VIP</div>
+                    <h3>PACK NOVIO</h3>
+                    <p>Tu boda merece lo mejor. Corte, barba, facial + copa de champagne.</p>
+                    <a href="https://wa.me/5211234567890?text=Hola,%20quiero%20info%20del%20paquete%20novio" class="btn btn-red btn-sm" target="_blank">MÁS INFO</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== RESEÑAS EN TARJETAS ========== -->
+    <section class="reviews-section" id="resenas">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">// RESEÑAS</span>
+                <h2 class="section-title">LA GENTE <span class="red">HABLA</span></h2>
+            </div>
+
+            <!-- Contenedor de reseñas - cargadas via API GET -->
+            <div class="reviews-container" id="reviewsContainer">
+                <!-- Reseñas se cargan dinámicamente desde Google Sheets -->
+            </div>
+
+            <!-- Formulario de reseña POST -->
+            <div class="review-form-wrapper">
+                <h3>DEJA TU <span class="red">RESEÑA</span></h3>
+                <p class="form-subtitle">Tu opinión nos importa, bro 🤜🤛</p>
+                <form id="reviewForm" class="review-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nombre3">NOMBRE</label>
+                            <input type="text" id="nombre3" name="nombre" placeholder="Tu nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label>RATING</label>
+                            <div class="star-rating" id="starRating">
+                                <input type="hidden" name="calificacion" value="5">
+                                <button type="button" class="star-btn active" data-value="1">★</button>
+                                <button type="button" class="star-btn active" data-value="2">★</button>
+                                <button type="button" class="star-btn active" data-value="3">★</button>
+                                <button type="button" class="star-btn active" data-value="4">★</button>
+                                <button type="button" class="star-btn active" data-value="5">★</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="comentario3">¿QUÉ TAL TU EXPERIENCIA?</label>
+                        <textarea id="comentario3" name="comentario" rows="3" placeholder="Cuenta cómo te fue..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-red">ENVIAR RESEÑA 🚀</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== HORARIOS Y MAPA ========== -->
+    <section class="location" id="ubicacion">
+        <div class="container">
+            <div class="location-grid">
+                <div class="location-info">
+                    <span class="section-tag">// ENCUÉNTRANOS</span>
+                    <h2 class="section-title">VISÍTANOS</h2>
+                    
+                    <div class="schedule-block">
+                        <h3>⏰ HORARIOS</h3>
+                        <div class="schedule-rows">
+                            <div class="sched-row">
+                                <span>LUN — VIE</span>
+                                <span class="sched-time">9:00 — 20:00</span>
+                            </div>
+                            <div class="sched-row">
+                                <span>SÁBADO</span>
+                                <span class="sched-time">9:00 — 18:00</span>
+                            </div>
+                            <div class="sched-row">
+                                <span>DOMINGO</span>
+                                <span class="sched-time">10:00 — 15:00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-info">
+                        <p>📍 Calle Principal #123, Col. Centro</p>
+                        <p>📞 (52) 1 123 456 7890</p>
+                        <p>✉️ info@almightybarber.co</p>
+                    </div>
+
+                    <a href="https://wa.me/5211234567890?text=Hola,%20quiero%20agendar%20una%20cita" class="btn btn-red btn-lg" target="_blank">
+                        RESERVAR POR WHATSAPP 📲
+                    </a>
+                </div>
+                <div class="location-map">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.2097!2d-99.1332!3d19.4326!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDI1JzU3LjQiTiA5OcKwMDcnNTkuNSJX!5e0!3m2!1ses!2smx!4v1"
+                        width="100%"
+                        height="100%"
+                        style="border:0; border-radius: 16px; min-height: 400px;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Ubicación de Almighty Barber Co.">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#" class="logo logo-lg">
+                        <span class="logo-emoji">💈</span>
+                        <span class="logo-text">ALMIGHTY<span class="logo-red">.</span></span>
+                    </a>
+                    <p>La barbería que marca tendencia. Estilo urbano, cortes de otro nivel.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Instagram">📷 IG</a>
+                        <a href="#" aria-label="TikTok">🎵 TikTok</a>
+                        <a href="#" aria-label="Facebook">📘 FB</a>
+                    </div>
+                </div>
+                <div class="footer-cols">
+                    <div class="footer-col">
+                        <h4>MENÚ</h4>
+                        <a href="#inicio">Inicio</a>
+                        <a href="#servicios">Servicios</a>
+                        <a href="#equipo">Equipo</a>
+                        <a href="#galeria">Galería</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>SERVICIOS</h4>
+                        <a href="#servicios">Corte</a>
+                        <a href="#servicios">Barba</a>
+                        <a href="#servicios">Fade</a>
+                        <a href="#servicios">VIP Pack</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Almighty Barber Co. Todos los derechos reservados. ✌️</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== BOTÓN WHATSAPP LLAMATIVO ========== -->
+    <a href="https://wa.me/5211234567890?text=Hola,%20quiero%20agendar%20una%20cita"
+       class="whatsapp-btn"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Contactar por WhatsApp"
+       id="whatsappBtn">
+        <div class="wa-pulse"></div>
+        <svg viewBox="0 0 24 24" width="30" height="30" fill="#fff">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a8 8 0 01-4.29-1.243l-.307-.185-2.871.853.853-2.871-.185-.307A8 8 0 1112 20z"/>
+        </svg>
+        <span class="wa-text">¡Agenda ya!</span>
+    </a>
+
+    <script type="module" src="app-urban.js"></script>
+</body>
+</html>

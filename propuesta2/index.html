@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Almighty Studio - Barbería moderna y minimalista. Reserva tu cita en segundos. Cortes de cabello, barba y grooming profesional.">
+    <meta name="keywords" content="barbería moderna, corte de cabello, grooming, barbershop, cita online">
+    <meta name="author" content="Almighty Studio">
+    <meta property="og:title" content="Almighty Studio - Barbería Moderna">
+    <meta property="og:description" content="Tu estilo, nuestra pasión. Reserva tu cita en segundos.">
+    <meta property="og:type" content="website">
+    <title>Almighty Studio | Barbería Moderna & Minimalista</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="modern.css">
+</head>
+<body>
+    <!-- ========== NAVEGACIÓN ========== -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <span class="logo-mark"></span>
+                <span class="logo-text">almighty<span class="logo-accent">studio</span></span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Menú">
+                <span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#agenda">Agenda</a></li>
+                <li><a href="#promociones">Promos</a></li>
+                <li><a href="#resenas">Reseñas</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="https://wa.me/5211234567890?text=Hola,%20quiero%20agendar%20una%20cita" class="nav-cta" target="_blank">Reservar</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ========== HERO ========== -->
+    <header class="hero" id="inicio">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <div class="hero-label">
+                    <span class="label-dot"></span>
+                    Aceptando citas ahora
+                </div>
+                <h1 class="hero-title">Tu estilo,<br>nuestra <span class="text-gradient">pasión.</span></h1>
+                <p class="hero-subtitle">Cortes de precisión, barba impecable y una experiencia que te hará volver. Agenda tu cita en segundos.</p>
+                <div class="hero-actions">
+                    <a href="https://wa.me/5211234567890?text=Hola,%20quiero%20agendar%20una%20cita" class="btn btn-primary" target="_blank">
+                        Reservar ahora
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                    <a href="#servicios" class="btn btn-ghost">Ver servicios</a>
+                </div>
+                <div class="hero-metrics">
+                    <div class="metric">
+                        <span class="metric-number">4.9</span>
+                        <span class="metric-label">Calificación</span>
+                    </div>
+                    <div class="metric-divider"></div>
+                    <div class="metric">
+                        <span class="metric-number">5K+</span>
+                        <span class="metric-label">Clientes</span>
+                    </div>
+                    <div class="metric-divider"></div>
+                    <div class="metric">
+                        <span class="metric-number">10+</span>
+                        <span class="metric-label">Años</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-img-wrapper">
+                    <img src="../assets/img/hero-modern.png" alt="Almighty Studio - Barbería moderna" loading="eager">
+                    <div class="hero-float-card">
+                        <span class="float-icon">✂</span>
+                        <div>
+                            <span class="float-title">Próxima cita disponible</span>
+                            <span class="float-time">Hoy, 3:00 PM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========== SERVICIOS ========== -->
+    <section class="services" id="servicios">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Servicios</span>
+                <h2 class="section-title">Lo que hacemos <span class="text-gradient">mejor</span></h2>
+                <p class="section-desc">Cada servicio diseñado para una experiencia premium</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon-wrap">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="3"/><path d="M6 21V9M18 21V9m0 0a3 3 0 10-6 0m6 0a3 3 0 11-6 0"/></svg>
+                    </div>
+                    <h3>Corte de Cabello</h3>
+                    <p>Corte personalizado con las últimas tendencias. Incluye lavado y styling.</p>
+                    <div class="service-footer">
+                        <span class="service-price">$150</span>
+                        <span class="service-duration">45 min</span>
+                    </div>
+                </div>
+                <div class="service-card popular">
+                    <div class="popular-tag">Más popular</div>
+                    <div class="service-icon-wrap">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.77 3.77z"/></svg>
+                    </div>
+                    <h3>Corte + Barba</h3>
+                    <p>El combo perfecto: corte premium y perfilado de barba con navaja.</p>
+                    <div class="service-footer">
+                        <span class="service-price">$250</span>
+                        <span class="service-duration">60 min</span>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon-wrap">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4l7.07 17.07 2.51-7.39 7.39-2.51L4 4z"/></svg>
+                    </div>
+                    <h3>Afeitado Clásico</h3>
+                    <p>Afeitado con toalla caliente y navaja. La experiencia definitiva.</p>
+                    <div class="service-footer">
+                        <span class="service-price">$180</span>
+                        <span class="service-duration">30 min</span>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon-wrap">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    </div>
+                    <h3>Fade Premium</h3>
+                    <p>Degradado de alta precisión con diseño personalizado.</p>
+                    <div class="service-footer">
+                        <span class="service-price">$200</span>
+                        <span class="service-duration">50 min</span>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon-wrap">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                    </div>
+                    <h3>Tratamiento Capilar</h3>
+                    <p>Hidratación profunda, masaje craneal y revitalización completa.</p>
+                    <div class="service-footer">
+                        <span class="service-price">$300</span>
+                        <span class="service-duration">40 min</span>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon-wrap">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </div>
+                    <h3>Paquete VIP</h3>
+                    <p>Todo incluido: corte, barba, facial, tratamiento y bebida cortesía.</p>
+                    <div class="service-footer">
+                        <span class="service-price">$450</span>
+                        <span class="service-duration">90 min</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== AGENDA RÁPIDA ========== -->
+    <section class="quick-book" id="agenda">
+        <div class="container">
+            <div class="quick-book-card">
+                <div class="quick-book-content">
+                    <span class="section-label">Agenda Rápida</span>
+                    <h2 class="section-title">Reserva en <span class="text-gradient">segundos</span></h2>
+                    <p>Sin llamadas, sin esperas. Manda un mensaje por WhatsApp y confirma tu cita al instante.</p>
+                    
+                    <div class="schedule-compact">
+                        <h3>Horarios</h3>
+                        <div class="schedule-pills">
+                            <div class="pill"><span>Lun - Vie</span><span>9:00 - 20:00</span></div>
+                            <div class="pill"><span>Sábado</span><span>9:00 - 18:00</span></div>
+                            <div class="pill"><span>Domingo</span><span>10:00 - 15:00</span></div>
+                        </div>
+                    </div>
+
+                    <a href="https://wa.me/5211234567890?text=Hola,%20quiero%20agendar%20una%20cita" class="btn btn-primary btn-lg" target="_blank">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a8 8 0 01-4.29-1.243l-.307-.185-2.871.853.853-2.871-.185-.307A8 8 0 1112 20z"/></svg>
+                        Agendar por WhatsApp
+                    </a>
+                </div>
+                <div class="quick-book-visual">
+                    <img src="../assets/img/service-1.png" alt="Servicio de barbería" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PROMOCIONES ========== -->
+    <section class="promotions" id="promociones">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Ofertas</span>
+                <h2 class="section-title">Promociones <span class="text-gradient">activas</span></h2>
+            </div>
+            <div class="promo-grid">
+                <div class="promo-card">
+                    <div class="promo-icon">🎉</div>
+                    <div class="promo-discount">-20%</div>
+                    <h3>Primera Visita</h3>
+                    <p>Descuento de bienvenida en tu primer servicio. ¡Te esperamos!</p>
+                    <a href="https://wa.me/5211234567890?text=Hola,%20quiero%20usar%20el%20descuento%20de%20primera%20visita" class="btn btn-outline-sm" target="_blank">Reclamar</a>
+                </div>
+                <div class="promo-card featured">
+                    <div class="promo-icon">👊</div>
+                    <div class="promo-discount">2×1</div>
+                    <h3>Martes de Amigos</h3>
+                    <p>Trae a un amigo y el segundo corte es completamente gratis.</p>
+                    <a href="https://wa.me/5211234567890?text=Hola,%20quiero%20reservar%20para%20martes%20de%20amigos" class="btn btn-outline-sm" target="_blank">Reservar</a>
+                </div>
+                <div class="promo-card">
+                    <div class="promo-icon">💎</div>
+                    <div class="promo-discount">VIP</div>
+                    <h3>Pack Novio</h3>
+                    <p>El paquete completo para tu día especial. Incluye copa de cortesía.</p>
+                    <a href="https://wa.me/5211234567890?text=Hola,%20quiero%20info%20del%20paquete%20novio" class="btn btn-outline-sm" target="_blank">Info</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== RESEÑAS ========== -->
+    <section class="reviews-section" id="resenas">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Reseñas</span>
+                <h2 class="section-title">Lo que dicen <span class="text-gradient">nuestros clientes</span></h2>
+                <p class="section-desc">Opiniones reales de quienes ya nos visitaron</p>
+            </div>
+
+            <!-- Contenedor de reseñas - cargadas via fetch GET -->
+            <div class="reviews-container" id="reviewsContainer">
+                <!-- Las reseñas se cargan dinámicamente -->
+            </div>
+
+            <!-- Formulario para nueva reseña (POST) -->
+            <div class="review-form-card">
+                <div class="form-header">
+                    <h3>Comparte tu experiencia</h3>
+                    <p>Tu opinión nos ayuda a mejorar</p>
+                </div>
+                <form id="reviewForm" class="review-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="nombre2">Nombre</label>
+                            <input type="text" id="nombre2" name="nombre" placeholder="Tu nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Calificación</label>
+                            <div class="star-rating" id="starRating">
+                                <input type="hidden" name="calificacion" value="5">
+                                <button type="button" class="star-btn active" data-value="1">★</button>
+                                <button type="button" class="star-btn active" data-value="2">★</button>
+                                <button type="button" class="star-btn active" data-value="3">★</button>
+                                <button type="button" class="star-btn active" data-value="4">★</button>
+                                <button type="button" class="star-btn active" data-value="5">★</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="comentario2">Comentario</label>
+                        <textarea id="comentario2" name="comentario" rows="3" placeholder="¿Cómo fue tu experiencia?" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        Enviar reseña
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== MAPA Y CONTACTO ========== -->
+    <section class="contact" id="contacto">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <span class="section-label">Contacto</span>
+                    <h2 class="section-title">Visítanos</h2>
+                    <div class="contact-items">
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <h4>Dirección</h4>
+                                <p>Calle Principal #123, Col. Centro</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div>
+                                <h4>Teléfono</h4>
+                                <p>(52) 1 123 456 7890</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">✉️</div>
+                            <div>
+                                <h4>Email</h4>
+                                <p>info@almightystudio.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-map">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.2097!2d-99.1332!3d19.4326!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDI1JzU3LjQiTiA5OcKwMDcnNTkuNSJX!5e0!3m2!1ses!2smx!4v1"
+                        width="100%"
+                        height="400"
+                        style="border:0; border-radius: 16px;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Ubicación de Almighty Studio">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <span class="logo-mark"></span>
+                        <span class="logo-text">almighty<span class="logo-accent">studio</span></span>
+                    </a>
+                    <p>Tu barbería de confianza. Estilo, precisión y la mejor experiencia.</p>
+                </div>
+                <div class="footer-nav">
+                    <div class="footer-col">
+                        <h4>Menú</h4>
+                        <a href="#inicio">Inicio</a>
+                        <a href="#servicios">Servicios</a>
+                        <a href="#agenda">Agenda</a>
+                        <a href="#resenas">Reseñas</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Servicios</h4>
+                        <a href="#servicios">Corte</a>
+                        <a href="#servicios">Barba</a>
+                        <a href="#servicios">Facial</a>
+                        <a href="#servicios">VIP</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Social</h4>
+                        <a href="#">Instagram</a>
+                        <a href="#">Facebook</a>
+                        <a href="#">TikTok</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Almighty Studio. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== BOTÓN WHATSAPP FIJO ========== -->
+    <a href="https://wa.me/5211234567890?text=Hola,%20quiero%20agendar%20una%20cita"
+       class="whatsapp-fixed"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Contactar por WhatsApp"
+       id="whatsappBtn">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="#fff">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a8 8 0 01-4.29-1.243l-.307-.185-2.871.853.853-2.871-.185-.307A8 8 0 1112 20z"/>
+        </svg>
+        <span>Agendar cita</span>
+    </a>
+
+    <script type="module" src="app-modern.js"></script>
+</body>
+</html>
