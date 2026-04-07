@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://proyecto-almighty.vercel.app/sitemap.xml

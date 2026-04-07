@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://proyecto-almighty.vercel.app/Barberias/sitemap.xml
+
