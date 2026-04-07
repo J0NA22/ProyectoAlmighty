@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Almighty Gym | Propuestas de Landing Page</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: #080808;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+    }
+    .ambient {
+      position: fixed; inset: 0; z-index: -1; overflow: hidden;
+    }
+    .ambient::before {
+      content: ''; position: absolute;
+      width: 70vw; height: 70vw; border-radius: 50%;
+      background: radial-gradient(circle, #E63946 0%, transparent 70%);
+      top: -30%; left: -20%; opacity: 0.06;
+      animation: drift 12s ease-in-out infinite alternate;
+    }
+    .ambient::after {
+      content: ''; position: absolute;
+      width: 60vw; height: 60vw; border-radius: 50%;
+      background: radial-gradient(circle, #C9A84C 0%, transparent 70%);
+      bottom: -30%; right: -20%; opacity: 0.06;
+      animation: drift 15s ease-in-out infinite alternate-reverse;
+    }
+    @keyframes drift { from { transform: scale(1); } to { transform: scale(1.15) translate(3%, 3%); } }
+
+    .header { text-align: center; margin-bottom: 70px; }
+    .header .badge {
+      display: inline-block;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+      padding: 6px 18px; border-radius: 100px;
+      font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;
+      color: #888; margin-bottom: 24px;
+    }
+    .header h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900; letter-spacing: -2px; margin-bottom: 16px;
+    }
+    .header h1 span { background: linear-gradient(135deg, #E63946, #C9A84C, #A7C957); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .header p { color: #666; font-size: 1.1rem; max-width: 520px; margin: 0 auto; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px; max-width: 1100px; width: 100%;
+    }
+    .card {
+      border-radius: 24px; overflow: hidden;
+      text-decoration: none; color: #fff;
+      border: 1px solid rgba(255,255,255,0.07);
+      transition: all 0.4s ease;
+      cursor: pointer; background: #111;
+    }
+    .card:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
+
+    .card-hero {
+      height: 200px; display: flex; align-items: center; justify-content: center;
+      font-size: 5rem; position: relative; overflow: hidden;
+    }
+    .card-a .card-hero { background: linear-gradient(135deg, #0D0D0D, #1C0508); }
+    .card-b .card-hero { background: linear-gradient(135deg, #1a2a0e, #2d3a1e); }
+    .card-c .card-hero { background: linear-gradient(135deg, #0A0A0A, #1a1508); }
+
+    .card-hero::after {
+      content: ''; position: absolute; inset: 0;
+    }
+    .card-a .card-hero::after { background: radial-gradient(circle at 30% 50%, rgba(230,57,70,0.3) 0%, transparent 60%); }
+    .card-b .card-hero::after { background: radial-gradient(circle at 70% 50%, rgba(167,201,87,0.3) 0%, transparent 60%); }
+    .card-c .card-hero::after { background: radial-gradient(circle at 50% 30%, rgba(201,168,76,0.3) 0%, transparent 60%); }
+
+    .card-body { padding: 30px; }
+    .card-tag {
+      display: inline-block; font-size: 0.65rem; font-weight: 800;
+      letter-spacing: 2.5px; text-transform: uppercase;
+      padding: 5px 12px; border-radius: 20px; margin-bottom: 14px;
+    }
+    .card-a .card-tag { background: rgba(230,57,70,0.12); color: #E63946; }
+    .card-b .card-tag { background: rgba(167,201,87,0.12); color: #A7C957; }
+    .card-c .card-tag { background: rgba(201,168,76,0.12); color: #C9A84C; }
+
+    .card h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 8px; }
+    .card p { color: #777; font-size: 0.9rem; line-height: 1.6; margin-bottom: 24px; }
+
+    .card-meta {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.5px;
+      transition: gap 0.3s;
+    }
+    .card:hover .card-meta { gap: 14px; }
+    .card-a .card-meta { color: #E63946; }
+    .card-b .card-meta { color: #A7C957; }
+    .card-c .card-meta { color: #C9A84C; }
+
+    .dots { display: flex; gap: 6px; margin-bottom: 20px; }
+    .dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid #222; }
+
+    footer { margin-top: 60px; color: #333; font-size: 0.8rem; text-align: center; }
+
+    @media (max-width: 600px) { .cards { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="ambient"></div>
+
+  <div class="header">
+    <div class="badge">Almighty Gym</div>
+    <h1>3 Propuestas de<br><span>Landing Page</span></h1>
+    <p>Tres estilos radicalmente distintos para encontrar el que conecta con tu audiencia.</p>
+  </div>
+
+  <div class="cards">
+    <a href="propuesta1/index.html" class="card card-a">
+      <div class="card-hero">🔥</div>
+      <div class="card-body">
+        <span class="card-tag">Propuesta 1</span>
+        <h2>Hard Training / Élite</h2>
+        <p>Intensidad, resultados medibles y disciplina. Para los que vinieron a trabajar, no a socializar.</p>
+        <div class="dots">
+          <div class="dot" style="background:#0D0D0D"></div>
+          <div class="dot" style="background:#E63946"></div>
+          <div class="dot" style="background:#FFD60A"></div>
+          <div class="dot" style="background:#F8F8F8"></div>
+        </div>
+        <div class="card-meta">Ver propuesta →</div>
+      </div>
+    </a>
+
+    <a href="propuesta2/index.html" class="card card-b">
+      <div class="card-hero">🌿</div>
+      <div class="card-body">
+        <span class="card-tag">Propuesta 2</span>
+        <h2>Bienestar / Familiar</h2>
+        <p>Sin juicios, sin presión. Comunidad amigable para principiantes y familias a su propio ritmo.</p>
+        <div class="dots">
+          <div class="dot" style="background:#606C38"></div>
+          <div class="dot" style="background:#A7C957"></div>
+          <div class="dot" style="background:#FEFAE0"></div>
+          <div class="dot" style="background:#6B4226"></div>
+        </div>
+        <div class="card-meta">Ver propuesta →</div>
+      </div>
+    </a>
+
+    <a href="propuesta3/index.html" class="card card-c">
+      <div class="card-hero">💎</div>
+      <div class="card-body">
+        <span class="card-tag">Propuesta 3</span>
+        <h2>Premium / Boutique</h2>
+        <p>Exclusividad, tecnología y atención personalizada. Membership para quienes toman su rendimiento en serio.</p>
+        <div class="dots">
+          <div class="dot" style="background:#0A0A0A"></div>
+          <div class="dot" style="background:#C9A84C"></div>
+          <div class="dot" style="background:#1E1E2E"></div>
+          <div class="dot" style="background:#F2EFE9"></div>
+        </div>
+        <div class="card-meta">Ver propuesta →</div>
+      </div>
+    </a>
+  </div>
+
+  <footer><p>&copy; 2026 Almighty Gym — Propuestas de Landing Page</p></footer>
+</body>
+</html>
