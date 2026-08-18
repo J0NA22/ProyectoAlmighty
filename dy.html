@@ -1,466 +1,668 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Horario de Salas</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<style>
-  :root{
-    --bg: #F5F6F8;
-    --panel: #FFFFFF;
-    --navy: #16213E;
-    --navy-soft: #2A3B63;
-    --teal: #1D7A73;
-    --teal-soft: #E6F3F1;
-    --amber: #D98E2C;
-    --border: #E1E4EA;
-    --text: #1B2230;
-    --text-dim: #6B7280;
-    --danger: #C0392B;
-  }
-  *{ box-sizing: border-box; }
-  body{
-    margin:0;
-    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    padding: 28px 20px 60px;
-  }
-  .wrap{ max-width: 1100px; margin: 0 auto; }
-
-  header{
-    display:flex; align-items:flex-end; justify-content:space-between;
-    flex-wrap: wrap; gap:16px;
-    margin-bottom: 22px;
-  }
-  .title-block h1{
-    font-size: 26px; letter-spacing:-0.02em; margin:0 0 4px;
-    color: var(--navy);
-    font-weight: 700;
-  }
-  .title-block p{ margin:0; color: var(--text-dim); font-size: 13.5px; }
-
-  .actions{ display:flex; gap:10px; flex-wrap: wrap; }
-  button.btn{
-    border:none; cursor:pointer; font-size: 13.5px; font-weight:600;
-    padding: 10px 16px; border-radius: 8px;
-    display:flex; align-items:center; gap:8px;
-    transition: transform .08s ease, box-shadow .15s ease;
-  }
-  button.btn:active{ transform: translateY(1px); }
-  .btn-primary{ background: var(--teal); color:#fff; }
-  .btn-primary:hover{ background:#176660; }
-  .btn-outline{ background:#fff; color:var(--navy); border:1px solid var(--border) !important; }
-  .btn-outline:hover{ background:#F0F1F4; }
-
-  .card{
-    background: var(--panel);
-    border:1px solid var(--border);
-    border-radius: 14px;
-    padding: 6px;
-    box-shadow: 0 1px 2px rgba(20,25,40,0.04);
-  }
-
-  #scheduleWrap {
-    position: relative;
-  }
-  #scheduleWrap::before {
-    content: '';
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 70%;
-    height: 70%;
-    background: url('PUMAS%20GG.png') no-repeat center center;
-    background-size: contain;
-    opacity: 0.12;
-    pointer-events: none;
-    z-index: 0;
-  }
-  table{ width:100%; border-collapse: collapse; table-layout: fixed; position: relative; z-index: 1; }
-  th, td{ border:1px solid var(--border); }
-  thead th{
-    background: var(--navy);
-    color:#fff;
-    font-size: 12.5px;
-    letter-spacing: .04em;
-    text-transform: uppercase;
-    padding: 12px 6px;
-    font-weight: 600;
-  }
-  thead th:first-child{ width: 78px; background: var(--navy-soft); }
-  tbody td.hour-cell{
-    background: var(--teal-soft);
-    color: var(--navy);
-    font-weight: 700;
-    font-size: 13px;
-    text-align:center;
-    vertical-align: middle;
-    font-variant-numeric: tabular-nums;
-  }
-  tbody td.slot{
-    padding: 0;
-    height: 64px;
-    cursor: pointer;
-    vertical-align: top;
-    position: relative;
-  }
-  tbody td.slot:hover{ background: rgba(250, 251, 252, 0.8); }
-  tbody td.slot .inner{
-    padding: 6px 8px;
-    height:100%;
-  }
-  tbody td.slot.filled{
-    background: rgba(255, 247, 234, 0.85);
-  }
-  tbody td.slot.filled:hover{ background: rgba(252, 239, 216, 0.85); }
-  .slot .instancia{
-    font-weight: 700; font-size: 12.5px; color: var(--navy);
-    white-space: nowrap; overflow:hidden; text-overflow:ellipsis;
-  }
-  .slot .organizador{
-    font-size: 11.5px; color: var(--text-dim); margin-top:2px;
-    white-space: nowrap; overflow:hidden; text-overflow:ellipsis;
-  }
-  .slot .salas{
-    display:inline-block; margin-top:4px;
-    font-size: 10.5px; font-weight:700; color: var(--amber);
-    background: #FBEBD3; padding: 1px 6px; border-radius: 999px;
-  }
-  .slot .empty-hint{
-    color:#C6CAD3; font-size:18px; text-align:center; line-height:64px;
-  }
-
-  /* Modal */
-  .overlay{
-    position: fixed; inset:0; background: rgba(22,33,62,0.45);
-    display:none; align-items:center; justify-content:center; z-index: 50;
-    padding: 20px;
-  }
-  .overlay.open{ display:flex; }
-  .modal{
-    background:#fff; border-radius: 14px; width:100%; max-width: 420px;
-    padding: 22px 22px 18px; box-shadow: 0 20px 60px rgba(0,0,0,.25);
-  }
-  .modal h2{ margin:0 0 4px; font-size:18px; color:var(--navy); }
-  .modal .sub{ margin:0 0 16px; font-size:12.5px; color:var(--text-dim); }
-  .field{ margin-bottom: 12px; }
-  .field label{ display:block; font-size:12px; font-weight:600; color:var(--navy); margin-bottom:5px; }
-  .field select, .field input{
-    width:100%; padding: 9px 10px; border-radius: 8px; border:1px solid var(--border);
-    font-size: 13.5px; font-family: inherit; color: var(--text);
-    background: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)), url('PUMAS%20GG.png') no-repeat center center;
-    background-size: auto 90%;
-  }
-  .field select:focus, .field input:focus{ outline:2px solid var(--teal); outline-offset:1px; }
-  .row2{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
-  .modal-actions{ display:flex; justify-content: space-between; align-items:center; margin-top: 16px; gap:8px; }
-  .modal-actions .right{ display:flex; gap:8px; }
-  .btn-text{ background:none; color: var(--danger); font-weight:600; font-size:12.5px; padding:8px 4px; }
-  .btn-text:hover{ text-decoration: underline; }
-  .btn-cancel{ background:#F0F1F4; color:var(--text); }
-  .btn-cancel:hover{ background:#E6E8EC; }
-
-  footer.note{
-    margin-top: 14px; font-size: 12px; color: var(--text-dim); text-align:center;
-  }
-
-  #toast{
-    position: fixed; bottom: 24px; left:50%; transform: translateX(-50%) translateY(20px);
-    background: var(--navy); color:#fff; padding: 10px 18px; border-radius: 999px;
-    font-size: 13px; opacity:0; pointer-events:none; transition: all .25s ease;
-    z-index: 60;
-  }
-  #toast.show{ opacity:1; transform: translateX(-50%) translateY(0); }
-
-  @media (max-width: 720px){
-    thead th{ font-size: 10px; padding: 8px 3px; }
-    .slot .organizador{ display:none; }
-    tbody td.hour-cell{ font-size: 11px; }
-  }
-</style>
-</head>
-<body>
-<div class="wrap">
-
-  <header>
-    <div class="title-block">
-      <h1>Horario semanal de salas</h1>
-      <p>Toca una celda o usa "Agregar horario" para asignar una instancia. Los datos se guardan automáticamente.</p>
-    </div>
-    <div class="actions">
-      <button class="btn btn-primary" id="btnAdd">＋ Agregar horario</button>
-      <button class="btn btn-outline" id="btnPdf">⬇ Exportar PDF</button>
-    </div>
-  </header>
-
-  <div class="card">
-    <div id="scheduleWrap">
-      <table id="scheduleTable">
-        <thead>
-          <tr>
-            <th>Hora</th>
-            <th>Lunes</th>
-            <th>Martes</th>
-            <th>Miércoles</th>
-            <th>Jueves</th>
-            <th>Viernes</th>
-            <th>Sábado</th>
-            <th>Domingo</th>
-          </tr>
-        </thead>
-        <tbody id="scheduleBody"></tbody>
-      </table>
-    </div>
-  </div>
-
-  <footer class="note">Horas mostradas: 16:00 – 22:00</footer>
-</div>
-
-<!-- Modal -->
-<div class="overlay" id="overlay">
-  <div class="modal">
-    <h2 id="modalTitle">Agregar horario</h2>
-    <p class="sub">Define el día, la hora y los detalles de la instancia.</p>
-
-    <div class="row2">
-      <div class="field">
-        <label>Día</label>
-        <select id="fDia"></select>
-      </div>
-      <div class="field">
-        <label>Hora</label>
-        <select id="fHora"></select>
-      </div>
-    </div>
-
-    <div class="field">
-      <label>Instancia</label>
-      <input type="text" id="fInstancia" placeholder="Ej. 4TOS">
-    </div>
-    <div class="field">
-      <label>Organizador</label>
-      <input type="text" id="fOrganizador" placeholder="Ej. PROSUR">
-    </div>
-    <div class="field">
-      <label>Cantidad de salas</label>
-      <input type="text" id="fSalas" placeholder="Ej. 4 SALAS">
-    </div>
-
-    <div class="modal-actions">
-      <button class="btn btn-text" id="btnDelete" style="display:none;">Eliminar</button>
-      <div class="right">
-        <button class="btn btn-cancel" id="btnCancel">Cancelar</button>
-        <button class="btn btn-primary" id="btnSave">Guardar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div id="toast"></div>
-
-<script>
-const DIAS = ["LUNES","MARTES","MIERCOLES","JUEVES","VIERNES","SABADO","DOMINGO"];
-const DIAS_LABEL = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"];
-const HORAS = ["16:00","17:00","18:00","19:00","20:00","21:00","22:00"];
-const STORAGE_KEY = "schedule-grid";
-
-let data = {}; // key "DIA|HORA" -> {instancia, organizador, salas}
-let editingKey = null;
-
-function cellKey(dia, hora){ return dia + "|" + hora; }
-
-function showToast(msg){
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(()=> t.classList.remove('show'), 1800);
-}
-
-function renderTable(){
-  const body = document.getElementById('scheduleBody');
-  body.innerHTML = "";
-  HORAS.forEach(hora => {
-    const tr = document.createElement('tr');
-    const hourTd = document.createElement('td');
-    hourTd.className = 'hour-cell';
-    hourTd.textContent = hora;
-    tr.appendChild(hourTd);
-
-    DIAS.forEach((dia, i) => {
-      const td = document.createElement('td');
-      td.className = 'slot';
-      const entry = data[cellKey(dia,hora)];
-      const inner = document.createElement('div');
-      inner.className = 'inner';
-      if(entry && (entry.instancia || entry.organizador || entry.salas)){
-        td.classList.add('filled');
-        inner.innerHTML =
-          (entry.instancia ? '<div class="instancia">'+escapeHtml(entry.instancia)+'</div>' : '') +
-          (entry.organizador ? '<div class="organizador">'+escapeHtml(entry.organizador)+'</div>' : '') +
-          (entry.salas ? '<span class="salas">'+escapeHtml(entry.salas)+'</span>' : '');
-      } else {
-        inner.innerHTML = '<div class="empty-hint">+</div>';
-      }
-      td.appendChild(inner);
-      td.addEventListener('click', () => openModal(dia, hora));
-      tr.appendChild(td);
-    });
-    body.appendChild(tr);
-  });
-}
-
-function escapeHtml(str){
-  return String(str).replace(/[&<>"']/g, s => ({
-    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
-  }[s]));
-}
-
-function populateSelects(){
-  const fDia = document.getElementById('fDia');
-  const fHora = document.getElementById('fHora');
-  fDia.innerHTML = DIAS.map((d,i)=>`<option value="${d}">${DIAS_LABEL[i]}</option>`).join('');
-  fHora.innerHTML = HORAS.map(h=>`<option value="${h}">${h}</option>`).join('');
-}
-
-function openModal(dia, hora){
-  editingKey = cellKey(dia, hora);
-  document.getElementById('modalTitle').textContent = 'Editar horario';
-  document.getElementById('fDia').value = dia;
-  document.getElementById('fHora').value = hora;
-  const entry = data[editingKey] || {};
-  document.getElementById('fInstancia').value = entry.instancia || '';
-  document.getElementById('fOrganizador').value = entry.organizador || '';
-  document.getElementById('fSalas').value = entry.salas || '';
-  document.getElementById('btnDelete').style.display = (entry.instancia||entry.organizador||entry.salas) ? 'inline-block' : 'none';
-  document.getElementById('overlay').classList.add('open');
-}
-
-function openModalBlank(){
-  editingKey = null;
-  document.getElementById('modalTitle').textContent = 'Agregar horario';
-  document.getElementById('fDia').selectedIndex = 0;
-  document.getElementById('fHora').selectedIndex = 0;
-  document.getElementById('fInstancia').value = '';
-  document.getElementById('fOrganizador').value = '';
-  document.getElementById('fSalas').value = '';
-  document.getElementById('btnDelete').style.display = 'none';
-  document.getElementById('overlay').classList.add('open');
-}
-
-function closeModal(){
-  document.getElementById('overlay').classList.remove('open');
-  editingKey = null;
-}
-
-async function saveEntry(){
-  const dia = document.getElementById('fDia').value;
-  const hora = document.getElementById('fHora').value;
-  const instancia = document.getElementById('fInstancia').value.trim();
-  const organizador = document.getElementById('fOrganizador').value.trim();
-  const salas = document.getElementById('fSalas').value.trim();
-  const key = cellKey(dia, hora);
-
-  data[key] = { instancia, organizador, salas };
-  await persist();
-  renderTable();
-  closeModal();
-  showToast('Horario guardado');
-}
-
-async function deleteEntry(){
-  const dia = document.getElementById('fDia').value;
-  const hora = document.getElementById('fHora').value;
-  const key = cellKey(dia, hora);
-  delete data[key];
-  await persist();
-  renderTable();
-  closeModal();
-  showToast('Horario eliminado');
-}
-
-async function persist(){
-  try{
-    await window.storage.set(STORAGE_KEY, JSON.stringify(data), false);
-  }catch(e){
-    console.error('Error guardando', e);
-  }
-}
-
-async function loadData(){
-  try{
-    const res = await window.storage.get(STORAGE_KEY, false);
-    if(res && res.value){
-      data = JSON.parse(res.value);
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Horario de Salas by Jonita</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    :root {
+      --bg: #F5F6F8;
+      --panel: #FFFFFF;
+      --navy: #16213E;
+      --navy-soft: #2A3B63;
+      --teal: #1D7A73;
+      --teal-soft: #E6F3F1;
+      --amber: #D98E2C;
+      --border: #E1E4EA;
+      --text: #1B2230;
+      --text-dim: #6B7280;
+      --danger: #C0392B;
     }
-  }catch(e){
-    data = {};
-  }
-  renderTable();
-}
 
-async function exportPdf(){
-  const btnPdf = document.getElementById('btnPdf');
-  const originalText = btnPdf.textContent;
-  btnPdf.textContent = 'Generando…';
-  btnPdf.disabled = true;
+    * {
+      box-sizing: border-box;
+    }
 
-  const actions = document.querySelector('.actions');
-  const subtitle = document.querySelector('.title-block p');
-  const header = document.querySelector('header');
-  
-  actions.style.display = 'none';
-  subtitle.style.display = 'none';
+    body {
+      margin: 0;
+      font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 28px 20px 60px;
+    }
 
-  const logo = document.createElement('img');
-  logo.src = 'PUMAS%20GG.png';
-  logo.style.height = '50px';
-  logo.style.objectFit = 'contain';
-  header.appendChild(logo);
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
 
-  try{
-    const target = document.querySelector('.wrap');
-    const canvas = await html2canvas(target, { scale: 2, backgroundColor: '#F5F6F8' });
-    const imgData = canvas.toDataURL('image/png');
-    const { jsPDF } = window.jspdf;
-    const orientation = canvas.width > canvas.height ? 'l' : 'p';
-    const pdf = new jsPDF({ orientation, unit: 'pt', format: 'a4' });
-    const pageW = pdf.internal.pageSize.getWidth();
-    const pageH = pdf.internal.pageSize.getHeight();
-    const margin = 24;
-    const maxW = pageW - margin*2;
-    const maxH = pageH - margin*2;
-    const ratio = Math.min(maxW/canvas.width, maxH/canvas.height);
-    const w = canvas.width * ratio;
-    const h = canvas.height * ratio;
-    const x = (pageW - w)/2;
-    const y = margin;
-    
-    pdf.addImage(imgData, 'PNG', x, y, w, h);
-    pdf.save('horario.pdf');
-  }catch(e){
-    console.error(e);
-    showToast('No se pudo exportar el PDF');
-  }finally{
-    actions.style.display = '';
-    subtitle.style.display = '';
-    header.removeChild(logo);
-    btnPdf.textContent = originalText;
-    btnPdf.disabled = false;
-  }
-}
+    header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
 
-document.getElementById('btnAdd').addEventListener('click', openModalBlank);
-document.getElementById('btnCancel').addEventListener('click', closeModal);
-document.getElementById('btnSave').addEventListener('click', saveEntry);
-document.getElementById('btnDelete').addEventListener('click', deleteEntry);
-document.getElementById('btnPdf').addEventListener('click', exportPdf);
-document.getElementById('overlay').addEventListener('click', (e)=>{ if(e.target.id==='overlay') closeModal(); });
+    .title-block h1 {
+      font-size: 26px;
+      letter-spacing: -0.02em;
+      margin: 0 0 4px;
+      color: var(--navy);
+      font-weight: 700;
+    }
 
-populateSelects();
-loadData();
-</script>
+    .title-block p {
+      margin: 0;
+      color: var(--text-dim);
+      font-size: 13.5px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button.btn {
+      border: none;
+      cursor: pointer;
+      font-size: 13.5px;
+      font-weight: 600;
+      padding: 10px 16px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform .08s ease, box-shadow .15s ease;
+    }
+
+    button.btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-primary {
+      background: var(--teal);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: #176660;
+    }
+
+    .btn-outline {
+      background: #fff;
+      color: var(--navy);
+      border: 1px solid var(--border) !important;
+    }
+
+    .btn-outline:hover {
+      background: #F0F1F4;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 6px;
+      box-shadow: 0 1px 2px rgba(20, 25, 40, 0.04);
+    }
+
+    #scheduleWrap {
+      position: relative;
+    }
+
+    #scheduleWrap::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70%;
+      height: 70%;
+      background: url('PUMAS%20GG.png') no-repeat center center;
+      background-size: contain;
+      opacity: 0.12;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      position: relative;
+      z-index: 1;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+    }
+
+    thead th {
+      background: var(--navy);
+      color: #fff;
+      font-size: 12.5px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      padding: 12px 6px;
+      font-weight: 600;
+    }
+
+    thead th:first-child {
+      width: 78px;
+      background: var(--navy-soft);
+    }
+
+    tbody td.hour-cell {
+      background: var(--teal-soft);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 13px;
+      text-align: center;
+      vertical-align: middle;
+      font-variant-numeric: tabular-nums;
+    }
+
+    tbody td.slot {
+      padding: 0;
+      height: 64px;
+      cursor: pointer;
+      vertical-align: top;
+      position: relative;
+    }
+
+    tbody td.slot:hover {
+      background: rgba(250, 251, 252, 0.8);
+    }
+
+    tbody td.slot .inner {
+      padding: 6px 8px;
+      height: 100%;
+    }
+
+    tbody td.slot.filled {
+      background: rgba(255, 247, 234, 0.85);
+    }
+
+    tbody td.slot.filled:hover {
+      background: rgba(252, 239, 216, 0.85);
+    }
+
+    .slot .instancia {
+      font-weight: 700;
+      font-size: 12.5px;
+      color: var(--navy);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .slot .organizador {
+      font-size: 11.5px;
+      color: var(--text-dim);
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .slot .salas {
+      display: inline-block;
+      margin-top: 4px;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--amber);
+      background: #FBEBD3;
+      padding: 1px 6px;
+      border-radius: 999px;
+    }
+
+    .slot .empty-hint {
+      color: #C6CAD3;
+      font-size: 18px;
+      text-align: center;
+      line-height: 64px;
+    }
+
+    /* Modal */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(22, 33, 62, 0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+      padding: 20px;
+    }
+
+    .overlay.open {
+      display: flex;
+    }
+
+    .modal {
+      background: #fff;
+      border-radius: 14px;
+      width: 100%;
+      max-width: 420px;
+      padding: 22px 22px 18px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .25);
+    }
+
+    .modal h2 {
+      margin: 0 0 4px;
+      font-size: 18px;
+      color: var(--navy);
+    }
+
+    .modal .sub {
+      margin: 0 0 16px;
+      font-size: 12.5px;
+      color: var(--text-dim);
+    }
+
+    .field {
+      margin-bottom: 12px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 5px;
+    }
+
+    .field select,
+    .field input {
+      width: 100%;
+      padding: 9px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      font-size: 13.5px;
+      font-family: inherit;
+      color: var(--text);
+      background: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)), url('PUMAS%20GG.png') no-repeat center center;
+      background-size: auto 90%;
+    }
+
+    .field select:focus,
+    .field input:focus {
+      outline: 2px solid var(--teal);
+      outline-offset: 1px;
+    }
+
+    .row2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+      gap: 8px;
+    }
+
+    .modal-actions .right {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-text {
+      background: none;
+      color: var(--danger);
+      font-weight: 600;
+      font-size: 12.5px;
+      padding: 8px 4px;
+    }
+
+    .btn-text:hover {
+      text-decoration: underline;
+    }
+
+    .btn-cancel {
+      background: #F0F1F4;
+      color: var(--text);
+    }
+
+    .btn-cancel:hover {
+      background: #E6E8EC;
+    }
+
+    footer.note {
+      margin-top: 14px;
+      font-size: 12px;
+      color: var(--text-dim);
+      text-align: center;
+    }
+
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--navy);
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 13px;
+      opacity: 0;
+      pointer-events: none;
+      transition: all .25s ease;
+      z-index: 60;
+    }
+
+    #toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (max-width: 720px) {
+      thead th {
+        font-size: 10px;
+        padding: 8px 3px;
+      }
+
+      .slot .organizador {
+        display: none;
+      }
+
+      tbody td.hour-cell {
+        font-size: 11px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <header>
+      <div class="title-block">
+        <h1>Horario semanal de salas</h1>
+        <p>Toca una celda o usa "Agregar horario" para asignar una instancia. Los datos se guardan automáticamente.</p>
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" id="btnAdd">＋ Agregar horario</button>
+        <button class="btn btn-outline" id="btnPdf">⬇ Exportar PDF</button>
+      </div>
+    </header>
+
+    <div class="card">
+      <div id="scheduleWrap">
+        <table id="scheduleTable">
+          <thead>
+            <tr>
+              <th>Hora</th>
+              <th>Lunes</th>
+              <th>Martes</th>
+              <th>Miércoles</th>
+              <th>Jueves</th>
+              <th>Viernes</th>
+              <th>Sábado</th>
+              <th>Domingo</th>
+            </tr>
+          </thead>
+          <tbody id="scheduleBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <footer class="note">Horas mostradas: 16:00 – 22:00</footer>
+  </div>
+
+  <!-- Modal -->
+  <div class="overlay" id="overlay">
+    <div class="modal">
+      <h2 id="modalTitle">Agregar horario</h2>
+      <p class="sub">Define el día, la hora y los detalles de la instancia.</p>
+
+      <div class="row2">
+        <div class="field">
+          <label>Día</label>
+          <select id="fDia"></select>
+        </div>
+        <div class="field">
+          <label>Hora</label>
+          <select id="fHora"></select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Instancia</label>
+        <input type="text" id="fInstancia" placeholder="Ej. 4TOS">
+      </div>
+      <div class="field">
+        <label>Organizador</label>
+        <input type="text" id="fOrganizador" placeholder="Ej. PROSUR">
+      </div>
+      <div class="field">
+        <label>Cantidad de salas</label>
+        <input type="text" id="fSalas" placeholder="Ej. 4 SALAS">
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-text" id="btnDelete" style="display:none;">Eliminar</button>
+        <div class="right">
+          <button class="btn btn-cancel" id="btnCancel">Cancelar</button>
+          <button class="btn btn-primary" id="btnSave">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast"></div>
+
+  <script>
+    const DIAS = ["LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO", "DOMINGO"];
+    const DIAS_LABEL = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+    const HORAS = ["16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
+    const STORAGE_KEY = "schedule-grid";
+
+    let data = {}; // key "DIA|HORA" -> {instancia, organizador, salas}
+    let editingKey = null;
+
+    function cellKey(dia, hora) { return dia + "|" + hora; }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 1800);
+    }
+
+    function renderTable() {
+      const body = document.getElementById('scheduleBody');
+      body.innerHTML = "";
+      HORAS.forEach(hora => {
+        const tr = document.createElement('tr');
+        const hourTd = document.createElement('td');
+        hourTd.className = 'hour-cell';
+        hourTd.textContent = hora;
+        tr.appendChild(hourTd);
+
+        DIAS.forEach((dia, i) => {
+          const td = document.createElement('td');
+          td.className = 'slot';
+          const entry = data[cellKey(dia, hora)];
+          const inner = document.createElement('div');
+          inner.className = 'inner';
+          if (entry && (entry.instancia || entry.organizador || entry.salas)) {
+            td.classList.add('filled');
+            inner.innerHTML =
+              (entry.instancia ? '<div class="instancia">' + escapeHtml(entry.instancia) + '</div>' : '') +
+              (entry.organizador ? '<div class="organizador">' + escapeHtml(entry.organizador) + '</div>' : '') +
+              (entry.salas ? '<span class="salas">' + escapeHtml(entry.salas) + '</span>' : '');
+          } else {
+            inner.innerHTML = '<div class="empty-hint">+</div>';
+          }
+          td.appendChild(inner);
+          td.addEventListener('click', () => openModal(dia, hora));
+          tr.appendChild(td);
+        });
+        body.appendChild(tr);
+      });
+    }
+
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, s => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[s]));
+    }
+
+    function populateSelects() {
+      const fDia = document.getElementById('fDia');
+      const fHora = document.getElementById('fHora');
+      fDia.innerHTML = DIAS.map((d, i) => `<option value="${d}">${DIAS_LABEL[i]}</option>`).join('');
+      fHora.innerHTML = HORAS.map(h => `<option value="${h}">${h}</option>`).join('');
+    }
+
+    function openModal(dia, hora) {
+      editingKey = cellKey(dia, hora);
+      document.getElementById('modalTitle').textContent = 'Editar horario';
+      document.getElementById('fDia').value = dia;
+      document.getElementById('fHora').value = hora;
+      const entry = data[editingKey] || {};
+      document.getElementById('fInstancia').value = entry.instancia || '';
+      document.getElementById('fOrganizador').value = entry.organizador || '';
+      document.getElementById('fSalas').value = entry.salas || '';
+      document.getElementById('btnDelete').style.display = (entry.instancia || entry.organizador || entry.salas) ? 'inline-block' : 'none';
+      document.getElementById('overlay').classList.add('open');
+    }
+
+    function openModalBlank() {
+      editingKey = null;
+      document.getElementById('modalTitle').textContent = 'Agregar horario';
+      document.getElementById('fDia').selectedIndex = 0;
+      document.getElementById('fHora').selectedIndex = 0;
+      document.getElementById('fInstancia').value = '';
+      document.getElementById('fOrganizador').value = '';
+      document.getElementById('fSalas').value = '';
+      document.getElementById('btnDelete').style.display = 'none';
+      document.getElementById('overlay').classList.add('open');
+    }
+
+    function closeModal() {
+      document.getElementById('overlay').classList.remove('open');
+      editingKey = null;
+    }
+
+    async function saveEntry() {
+      const dia = document.getElementById('fDia').value;
+      const hora = document.getElementById('fHora').value;
+      const instancia = document.getElementById('fInstancia').value.trim();
+      const organizador = document.getElementById('fOrganizador').value.trim();
+      const salas = document.getElementById('fSalas').value.trim();
+      const key = cellKey(dia, hora);
+
+      data[key] = { instancia, organizador, salas };
+      await persist();
+      renderTable();
+      closeModal();
+      showToast('Horario guardado');
+    }
+
+    async function deleteEntry() {
+      const dia = document.getElementById('fDia').value;
+      const hora = document.getElementById('fHora').value;
+      const key = cellKey(dia, hora);
+      delete data[key];
+      await persist();
+      renderTable();
+      closeModal();
+      showToast('Horario eliminado');
+    }
+
+    async function persist() {
+      try {
+        await window.storage.set(STORAGE_KEY, JSON.stringify(data), false);
+      } catch (e) {
+        console.error('Error guardando', e);
+      }
+    }
+
+    async function loadData() {
+      try {
+        const res = await window.storage.get(STORAGE_KEY, false);
+        if (res && res.value) {
+          data = JSON.parse(res.value);
+        }
+      } catch (e) {
+        data = {};
+      }
+      renderTable();
+    }
+
+    async function exportPdf() {
+      const btnPdf = document.getElementById('btnPdf');
+      const originalText = btnPdf.textContent;
+      btnPdf.textContent = 'Generando…';
+      btnPdf.disabled = true;
+
+      const actions = document.querySelector('.actions');
+      const subtitle = document.querySelector('.title-block p');
+      const header = document.querySelector('header');
+
+      actions.style.display = 'none';
+      subtitle.style.display = 'none';
+
+      const logo = document.createElement('img');
+      logo.src = 'PUMAS%20GG.png';
+      logo.style.height = '50px';
+      logo.style.objectFit = 'contain';
+      header.appendChild(logo);
+
+      try {
+        const target = document.querySelector('.wrap');
+        const canvas = await html2canvas(target, { scale: 2, backgroundColor: '#F5F6F8' });
+        const imgData = canvas.toDataURL('image/png');
+        const { jsPDF } = window.jspdf;
+        const orientation = canvas.width > canvas.height ? 'l' : 'p';
+        const pdf = new jsPDF({ orientation, unit: 'pt', format: 'a4' });
+        const pageW = pdf.internal.pageSize.getWidth();
+        const pageH = pdf.internal.pageSize.getHeight();
+        const margin = 24;
+        const maxW = pageW - margin * 2;
+        const maxH = pageH - margin * 2;
+        const ratio = Math.min(maxW / canvas.width, maxH / canvas.height);
+        const w = canvas.width * ratio;
+        const h = canvas.height * ratio;
+        const x = (pageW - w) / 2;
+        const y = margin;
+
+        pdf.addImage(imgData, 'PNG', x, y, w, h);
+        pdf.save('horario.pdf');
+      } catch (e) {
+        console.error(e);
+        showToast('No se pudo exportar el PDF');
+      } finally {
+        actions.style.display = '';
+        subtitle.style.display = '';
+        header.removeChild(logo);
+        btnPdf.textContent = originalText;
+        btnPdf.disabled = false;
+      }
+    }
+
+    document.getElementById('btnAdd').addEventListener('click', openModalBlank);
+    document.getElementById('btnCancel').addEventListener('click', closeModal);
+    document.getElementById('btnSave').addEventListener('click', saveEntry);
+    document.getElementById('btnDelete').addEventListener('click', deleteEntry);
+    document.getElementById('btnPdf').addEventListener('click', exportPdf);
+    document.getElementById('overlay').addEventListener('click', (e) => { if (e.target.id === 'overlay') closeModal(); });
+
+    populateSelects();
+    loadData();
+  </script>
 </body>
+
 </html>
