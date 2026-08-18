@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,10 +8,15 @@
     <title>Proyectos Almighty | Portal Principal</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Inter:wght@400;600&display=swap"
+        rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: #050505;
@@ -27,15 +33,20 @@
         /* Fondo dinámico */
         .ambient-bg {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             overflow: hidden;
             z-index: -1;
         }
 
-        .ambient-bg::before, .ambient-bg::after {
+        .ambient-bg::before,
+        .ambient-bg::after {
             content: '';
             position: absolute;
-            width: 60vw; height: 60vw;
+            width: 60vw;
+            height: 60vw;
             border-radius: 50%;
             filter: blur(120px);
             opacity: 0.15;
@@ -44,18 +55,25 @@
 
         .ambient-bg::before {
             background: #D4A843;
-            top: -20%; left: -10%;
+            top: -20%;
+            left: -10%;
         }
 
         .ambient-bg::after {
             background: #667eea;
-            bottom: -20%; right: -10%;
+            bottom: -20%;
+            right: -10%;
             animation-delay: 5s;
         }
 
         @keyframes pulse {
-            0% { transform: scale(1) translate(0, 0); }
-            100% { transform: scale(1.1) translate(5%, 5%); }
+            0% {
+                transform: scale(1) translate(0, 0);
+            }
+
+            100% {
+                transform: scale(1.1) translate(5%, 5%);
+            }
         }
 
         .header {
@@ -117,8 +135,11 @@
         .card::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
             opacity: 0;
             transition: opacity 0.4s;
         }
@@ -126,7 +147,7 @@
         .card:hover:not(.disabled) {
             transform: translateY(-10px);
             border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
 
         .card:hover:not(.disabled)::before {
@@ -134,7 +155,8 @@
         }
 
         .icon-wrapper {
-            width: 80px; height: 80px;
+            width: 80px;
+            height: 80px;
             border-radius: 20px;
             display: flex;
             align-items: center;
@@ -206,6 +228,22 @@
             box-shadow: 0 0 20px rgba(102, 126, 234, 0.4);
         }
 
+        .btn-purple {
+            background: #9b59b6;
+            color: #fff;
+            border: none;
+        }
+
+        .card:hover:not(.disabled) .btn-purple {
+            box-shadow: 0 0 20px rgba(155, 89, 182, 0.4);
+        }
+
+        .schedule-icon {
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.2), rgba(155, 89, 182, 0.05));
+            border: 1px solid rgba(155, 89, 182, 0.3);
+            color: #9b59b6;
+        }
+
         /* Estilos para estado deshabilitado (Gym) */
         .card.disabled {
             cursor: default;
@@ -220,7 +258,8 @@
 
         .badge {
             position: absolute;
-            top: 20px; right: 20px;
+            top: 20px;
+            right: 20px;
             background: rgba(255, 255, 255, 0.1);
             padding: 6px 12px;
             border-radius: 30px;
@@ -239,9 +278,10 @@
         }
     </style>
 </head>
+
 <body>
     <div class="ambient-bg"></div>
-    
+
     <div class="header">
         <h1>Proyectos <span>Almighty</span></h1>
         <p>Selecciona a qué sección del proyecto deseas acceder para ver las propuestas correspondientes.</p>
@@ -254,7 +294,8 @@
                 💈
             </div>
             <h2>Barberías</h2>
-            <p>Descubre las diferentes propuestas de diseño (clásico, moderno, urbano) orientadas a la experiencia premium de barbería.</p>
+            <p>Descubre las diferentes propuestas de diseño (clásico, moderno, urbano) orientadas a la experiencia
+                premium de barbería.</p>
             <div class="btn btn-gold">Acceder al Proyecto</div>
         </a>
 
@@ -265,9 +306,21 @@
                 🏋️‍♂️
             </div>
             <h2>Gimnasios</h2>
-            <p>Descubre las diferentes propuestas de landing pages (Élite, Bienestar, Premium) para la captación de clientes de gimnasios.</p>
+            <p>Descubre las diferentes propuestas de landing pages (Élite, Bienestar, Premium) para la captación de
+                clientes de gimnasios.</p>
             <div class="btn btn-blue">Acceder al Proyecto</div>
+        </a>
+
+        <!-- Tarjeta de Horarios -->
+        <a href="dy.html" class="card">
+            <div class="icon-wrapper schedule-icon">
+                📅
+            </div>
+            <h2>Horario</h2>
+            <p>Accede al panel de administración de los horarios semanales de las salas y gestiona las instancias.</p>
+            <div class="btn btn-purple">Acceder al Horario</div>
         </a>
     </div>
 </body>
+
 </html>
